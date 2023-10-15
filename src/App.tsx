@@ -1,25 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import { ChangeTryb } from "./components/ChangeTryb";
+import { Body } from "./components/Body";
+import { AppContextProvider } from "./context/AppContext";
+import Home from "./components/Home";
+import NotFound from "./components/NotFound";
+import Navigation from "./components/Navigation";
+import Post from "./components/Post";
+import PostsList from "./components/PostsList";
+import NewPost from "./components/NewPost";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContextProvider>
+      <div className="App">
+        <Body>
+          <ChangeTryb />
+          <Navigation />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/postslist" element={<PostsList />} />
+            <Route path="/:id?" element={<Post />} />
+            <Route path="/post/new" element={<NewPost />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Body>
+      </div>
+    </AppContextProvider>
   );
 }
 
